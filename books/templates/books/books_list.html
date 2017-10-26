@@ -1,0 +1,28 @@
+{% extends 'books/index.html' %}
+
+{% block content %}
+    <h1>All Books</h1>
+        <a href="/books/book_create/">Create</a>
+<br><br>
+    {% for book in all_books %}
+        {{ book.title }}
+               <div>{% for r in book.rating_set.all %}
+                   <div >
+                   <button class='like' style="float: left;" value={{ book.id }} >+</button>
+                       <div style="float: left;" class="l">{{ r.like }}</div>
+                   <button class='dislike' style="float: left;" value={{ book.id }}>-</button>
+                       <div style="float: left;" class="dl">{{ r.dislike }}</div>
+                   </div>
+        {% endfor %}
+        </div>
+        <br>
+
+        <a href="/books/detail_book/{{ book.pk }}">detail</a>
+        <a href="/books/book_update/{{ book.pk }}">update</a>
+        <a href="/books/book_delete/{{ book.pk }}">delete</a>
+        <br>
+
+        --------------------------------------------------------
+        <br>
+    {% endfor %}
+{% endblock %}

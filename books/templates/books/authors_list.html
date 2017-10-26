@@ -1,0 +1,19 @@
+{% extends 'books/index.html' %}
+
+{% block content %}
+    <h1>All authors</h1>
+            <a href="/books/author_create/">Create</a>
+    <br><br>
+
+    {% for author in authors %}
+        Id: {{ author.pk }}
+        Name: {{ author.name }}<br>
+        Date of Birth: {{ author.date_bir }}<br>
+        Biography: {{ author.bio }}
+        <a href="/books/author_update/{{ author.pk }}">update</a>
+        <a href="/books/author_delete/{{ author.pk }}">delete</a>
+        <br>
+        --------------------------------------------------------
+        <br>
+    {% endfor %}
+{% endblock %}

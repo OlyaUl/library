@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    {% csrf_token %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'books/css/style.css' %}">
+    <script src="{% static 'books/js/main.js' %}"></script>
+
+</head>
+<body>
+
+<div>
+    <a href="/books/all_books/">Books</a>
+    <a href="/books/authors/">Authors</a>
+    <a href="/books/categories/">Category</a>
+</div>
+
+{% block content %}
+{% endblock %}
+</body>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+</html>

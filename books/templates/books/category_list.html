@@ -1,0 +1,20 @@
+{% extends 'books/index.html' %}
+
+{% block content %}
+
+    <h1>All categories</h1>
+        <a href="/books/category_create/">Create</a>
+<br><br>
+    {% for cat in categories %}
+        id: {{ cat.pk }}<br>
+        Title: {{ cat.title }}<br>
+        description: {{ cat.description }}<br>
+        <a href="/books/category_update/{{ cat.pk }}">update</a>
+        <a href="/books/category_delete/{{ cat.pk }}">delete</a>
+        <br>
+        --------------------------------------------------------
+        <br>
+
+    {% endfor %}
+    <br>
+{% endblock %}

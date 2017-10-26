@@ -1,0 +1,26 @@
+Id: {{ book.pk }}<br>
+
+Title: {{ book.title }}<br>
+
+Year: {{ book.year }}<br>
+Description: {{ book.description }}<br>
+
+{% for auth in book.authors.all %}
+    Authors: {{ auth.name }}<br>
+{% endfor %}
+
+Category: {{ book.category.title }}<br>
+
+{% for cat in book.category.all %}
+    Category1: {{ cat.title }}<br>
+{% endfor %}
+
+------------------------------------------------------
+<br>
+        <a href="/books/comment_create/">New comment</a>
+{% block new_comment %}
+{% endblock %}
+<p style="margin-left:2em">{% for com in book.comment_set.all %}
+    Comment: {{ com.comment }}<br>
+{% endfor %}
+</p>

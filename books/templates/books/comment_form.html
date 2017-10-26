@@ -1,0 +1,12 @@
+{% extends 'books/book_detail.html' %}
+
+{% block new_comment %}
+   <form method='POST' action="{% url 'comment_create' %}">
+    {% csrf_token %}
+    {{form.as_p}}
+  <!--<input type="text" name="title">title<br>-->
+  <!--<input type="text" name="description">description<br>-->
+
+  <p><input type="submit">OK</p>
+ </form>
+{% endblock %}
