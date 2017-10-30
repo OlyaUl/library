@@ -1,0 +1,23 @@
+
+{% extends 'books/index.html' %}
+{% block content %}
+<div id="register">
+       <h1>Register</h1>
+
+        {% if registered %}
+        <strong>thank you for registering!</strong>
+        <a href="/books/">Return to the homepage.</a><br />
+        {% else %}
+       <strong>register here!</strong><br />
+
+        <form id="user_form" method="post" action="{% url 'my_auth:register_view' %}"
+                enctype="multipart/form-data">
+
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <input type="submit" name="submit" value="Register" />
+        </form>
+        {% endif %}
+    </div>
+{% endblock %}
