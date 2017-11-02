@@ -13,6 +13,22 @@
 </head>
 <body>
 
+        {% if user.is_authenticated %}
+        <h3>hello, {{ user.username }}!</h3>
+        {% else %}
+        <h3>hello, user!</h3>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+        <a href="/my_auth/logout/">Logout</a><br />
+        {% else %}
+        <a href="{% url 'my_auth:login_view' %}" >Sign In</a>
+        <a href="{% url 'my_auth:register_view' %}">Sign Up</a><br />
+        {% endif %}
+
+
+
+
 <div>
     <a href="/books/all_books/">Books</a>
     <a href="/books/authors/">Authors</a>

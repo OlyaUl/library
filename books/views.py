@@ -10,6 +10,23 @@ from .forms import CategoryForm, AuthorForm, BookForm,  CommentForm
 from django.urls import reverse_lazy
 import json
 
+
+def index(request):
+    # return HttpResponse("Hello, world!")
+    books = Book.objects.all()
+    for b in books:
+        id = b.id
+        print(id)
+        get_r = Rating.objects.filter(book_id=id).exists()
+        print(get_r)
+
+        if get_r == False:
+            Rating.objects.create(like=0, dislike=0, book_id=id)
+
+    return render(request, 'books/index.html',
+                  {'books': books})
+
+
 # list view --------------------------------------------------
 class CategoryListView(ListView):
     template_name = 'books/category_list.html'
@@ -66,14 +83,17 @@ class BookDetailView(DetailView):
     model = Book
     # slug_url_kwarg = 'slug'
     # pk_url_kwarg = 'category_id'
+
     def get_context_data(self, **kwargs):
         context = super(BookDetailView, self).get_context_data(**kwargs)
         context['now'] = timezone.now()
         return context
 
+
 class AuthorDetailView(DetailView):
     template_name = 'books/author_detail.html'
     model = Author
+
     def get_context_data(self, **kwargs):
         context = super(AuthorDetailView, self).get_context_data(**kwargs)
         context['now'] = timezone.now()
@@ -83,11 +103,13 @@ class AuthorDetailView(DetailView):
 class CategoryDetailView(DetailView):
     template_name = 'books/category_detail.html'
     model = Category
+
     def get_context_data(self, **kwargs):
         context = super(CategoryDetailView, self).get_context_data(**kwargs)
         context['now'] = timezone.now()
         return context
 # end detail view --------------------------------------------------
+
 
 # create view ??--------------------------------------------------
 class CategoryCreateView(ListView):
@@ -150,21 +172,6 @@ class AuthorUpdate(UpdateView):
 # -----------------------------------------------------------------------------------------
 
 
-def index(request):
-    # return HttpResponse("Hello, world!")
-    books = Book.objects.all()
-    for b in books:
-        id = b.id
-        print(id)
-        get_r = Rating.objects.filter(book_id=id).exists()
-        print(get_r)
-        if get_r == False:
-            Rating.objects.create(like=0, dislike=0, book_id=id)
-
-    return render(request, 'books/index.html',
-                  {'books': books})
-
-
 def set_like(request):
     id = request.GET.get('id', None)
     print(id)
@@ -173,6 +180,7 @@ def set_like(request):
     new_like = int(old_like_value) + 1
     Rating.objects.filter(book_id=id).update(like=new_like)
     return HttpResponse(json.dumps(str(new_like)))
+
 
 def set_dislike(request):
     id = request.GET.get('id', None)

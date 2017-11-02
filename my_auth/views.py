@@ -6,7 +6,6 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 # Create your views here.
 from django.views.generic import CreateView
-
 from .forms import UserForm
 
 
@@ -24,7 +23,6 @@ def login_view(request):
         else:
             print("Invalid login details: {0}, {1}".format(username, password))
             return HttpResponse("Invalid login details supplied.")
-
     else:
         return render(request, 'my_auth/login.html', {})
 
@@ -37,7 +35,8 @@ class UserFormView(CreateView):
     def form_valid(self, form):
         response = super(UserFormView, self).form_valid(form)
         self.object.set_password(form.cleaned_data['password'])
-        response
+        self.object.save()
+        return response
 
     def get_context_data(self, **kwargs):
         return super(UserFormView, self).get_context_data(**kwargs)
@@ -60,11 +59,11 @@ class UserFormView(CreateView):
         if user:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect('/network/')
+                return HttpResponseRedirect('/books/')
             else:
                 return HttpResponse("Your account is disabled.")
         else:
             print("Invalid login details: {0}, {1}".format(username, password))
             return HttpResponse("Invalid login details supplied.")
     else:
-        return render(request, 'auth/login.html', {})'''
+        return render(request, 'books/login.html', {})'''

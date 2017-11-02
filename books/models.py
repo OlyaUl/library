@@ -10,11 +10,12 @@ class Book(models.Model):
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='all_img', blank=True)
     prev = models.ImageField(upload_to='all_img', blank=True)
+
     # comment = models.ForeignKey('Comment', on_delete=models.CASCADE, blank=True, default=0)
     # rating = models.OneToOneField('Rating', on_delete=models.CASCADE, blank=True, default=0)
-
     def __str__(self):
         return '{0}'.format(self.title)
+
 
 class Rating(models.Model):
     like = models.IntegerField()

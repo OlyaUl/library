@@ -20,5 +20,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-url(r'^books/', include('books.urls')),
+    url(r'^books/', include('books.urls')),
+    url(r'^my_auth/', include('my_auth.urls', namespace="my_auth")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
